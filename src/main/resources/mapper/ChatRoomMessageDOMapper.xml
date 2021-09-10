@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.runbrick.apply.mapper.ChatRoomMessageDOMapper">
+
+    <resultMap id="BaseResultMap" type="com.runbrick.apply.domain.ChatRoomMessageDO">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="chatRoomId" column="chat_room_id" jdbcType="BIGINT"/>
+            <result property="chatFromUserId" column="chat_from_user_id" jdbcType="BIGINT"/>
+            <result property="message" column="message" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,chat_room_id,chat_from_user_id,
+        message,create_time
+    </sql>
+</mapper>

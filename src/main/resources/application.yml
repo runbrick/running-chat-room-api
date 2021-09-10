@@ -1,0 +1,21 @@
+server:
+  port: 7456
+
+spring:
+  # 数据库链接
+  datasource:
+    url: jdbc:mysql://19.168.1.252:3307/rb_chat_room?useUnicode=true&characterEncoding=utf-8
+    username: hxhc
+    password: 111111
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # 格式化时间
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+mybatis-plus:
+  global-config:
+    banner: false
+# runbrick chat 配置
+rb-chat:
+  vserion: 1.0
+  name: 聊天室
