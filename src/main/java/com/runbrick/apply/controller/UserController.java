@@ -1,7 +1,9 @@
 package com.runbrick.apply.controller;
 
 import com.runbrick.apply.domain.entity.LoginBody;
+import com.runbrick.apply.service.LoginService;
 import com.runbrick.apply.util.Result;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -11,12 +13,17 @@ import org.springframework.web.bind.annotation.*;
  * @since 1.8
  */
 @RestController
+@AllArgsConstructor
+@RequestMapping("/user")
 public class UserController {
+
+    LoginService loginService;
 
     /**
      * 登录
-     * @param loginBody
-     * @return
+     *
+     * @param loginBody LoginBody
+     * @return Result
      */
     @RequestMapping(method = RequestMethod.POST)
     public Result login(@RequestBody LoginBody loginBody) {
@@ -25,15 +32,18 @@ public class UserController {
 
     /**
      * 注册
-     * @param username
-     * @param password
-     * @return
+     *
+     * @param username String
+     * @param password String
+     * @param nickname String
+     * @return Result
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, path = "register")
     public Result register(
             @RequestParam("username") String username,
-            @RequestParam("password") String password
+            @RequestParam("password") String password,
+            @RequestParam("nickname") String nickname
     ) {
-        return null;
+        return loginService.doRegister(username, password, nickname);
     }
 }

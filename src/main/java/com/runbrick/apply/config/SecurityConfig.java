@@ -1,14 +1,23 @@
 package com.runbrick.apply.config;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Qualifier("userDetailsServiceImpl")
+    UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -18,10 +27,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 不使用 session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/login").anonymous()
-                .antMatchers().hasRole("USER")
-                .antMatchers().hasRole("ADMIN")
-                .antMatchers().permitAll()
+                .antMatchers(
+                        "/user/login",
+                        "/user/register"
+                ).anonymous()
+//                .antMatchers().hasRole("USER")
+//                .antMatchers().hasRole("ADMIN")
+//                .antMatchers().permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .headers().frameOptions().disable();
@@ -33,8 +45,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.debug(true);
     }
 
+    /**
+     * 强散列哈希加密实现
+     */
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    /**
+     * 身份认证接口
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 }

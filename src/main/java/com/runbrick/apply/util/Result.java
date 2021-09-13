@@ -19,7 +19,7 @@ public class Result extends HashMap<String, Object> {
     public Result(int code, String msg, Object data) {
         super.put("code", code);
         super.put("message", msg);
-        if (StringUtil.isNotNull(data)) {
+        if (StringUtils.isNotNull(data)) {
             super.put("data", data);
         }
     }

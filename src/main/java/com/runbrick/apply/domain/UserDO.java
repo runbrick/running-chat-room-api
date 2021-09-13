@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 /**
@@ -32,7 +30,6 @@ public class UserDO implements Serializable {
     /**
      * 
      */
-    @JsonIgnore
     @TableField(value = "password")
     private String password;
 
@@ -41,6 +38,18 @@ public class UserDO implements Serializable {
      */
     @TableField(value = "create_time")
     private Date createTime;
+
+    /**
+     * 
+     */
+    @TableField(value = "role")
+    private String role;
+
+    /**
+     * 昵称
+     */
+    @TableField(value = "nickname")
+    private String nickname;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -60,7 +69,9 @@ public class UserDO implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()))
+            && (this.getNickname() == null ? other.getNickname() == null : this.getNickname().equals(other.getNickname()));
     }
 
     @Override
@@ -71,6 +82,8 @@ public class UserDO implements Serializable {
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
+        result = prime * result + ((getRole() == null) ? 0 : getRole().hashCode());
+        result = prime * result + ((getNickname() == null) ? 0 : getNickname().hashCode());
         return result;
     }
 
@@ -84,6 +97,8 @@ public class UserDO implements Serializable {
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
         sb.append(", createTime=").append(createTime);
+        sb.append(", role=").append(role);
+        sb.append(", nickname=").append(nickname);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,4 +1,4 @@
-package com.runbrick.apply.service;
+package com.runbrick.apply.core.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

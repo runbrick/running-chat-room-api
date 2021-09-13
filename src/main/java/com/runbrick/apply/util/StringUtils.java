@@ -6,7 +6,7 @@ package com.runbrick.apply.util;
  * @author chow
  * @since 1.8
  */
-public class StringUtil {
+public class StringUtils {
 
 
     /**

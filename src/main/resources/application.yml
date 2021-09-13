@@ -4,10 +4,15 @@ server:
 spring:
   # 数据库链接
   datasource:
-    url: jdbc:mysql://19.168.1.252:3307/rb_chat_room?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.1.252:3307/rb_chat_room?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: hxhc
     password: 111111
     driver-class-name: com.mysql.cj.jdbc.Driver
+    # 简单的使用 hikari 作为数据库连接池
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 12
+      connection-timeout: 200000
   # 格式化时间
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
